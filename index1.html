@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ultimate Funny Message</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: auto;
+            position: relative;
+            color: white;
+        }
+
+        /* Enhanced Background Effects */
+        .cyber-grid {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        .neon-pulse {
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            background: radial-gradient(circle, rgba(255,105,180,0.2) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+            z-index: 0;
+        }
+
+        /* New Heart Pulse Effect */
+        .heart-pulse {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            animation: heartThrob 2s infinite;
+            pointer-events: none;
+        }
+
+        /* Floating Emojis System */
+        .emojis-floating {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.3;
+            animation: float linear infinite;
+            filter: drop-shadow(0 0 5px rgba(255,105,180,0.5));
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); }
+        }
+
+        /* Main Content Container */
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px;
+            z-index: 2;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        /* Enhanced Holographic Text Boxes */
+        .text-box {
+            position: relative;
+            width: 100%;
+            padding: 30px;
+            color: white;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            text-shadow: 0 0 10px rgba(255,105,180,0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(255,105,180,0.3);
+            opacity: 0;
+            transition: all 0.5s ease;
+            margin-bottom: 20px;
+            transform-style: preserve-3d;
+        }
+
+        .text-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff69b4, #ff9ff3, #ff69b4);
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+            border-radius: 22px;
+        }
+
+        /* Enhanced Gradient Text */
+        .gradient-text {
+            background: linear-gradient(45deg, #ff69b4, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Pacifico', cursive;
+            font-weight: 400;
+            text-shadow: 0 0 15px rgba(255,105,180,0.5);
+        }
+
+        /* New Text Styling */
+        .message-text {
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+            margin: 15px 0;
+        }
+
+        /* Enhanced Emoji Styling */
+        .emoji {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin: 20px 0;
+            display: inline-block;
+            animation: bounce 2s infinite, heartbeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255,105,180,0.7));
+        }
+
+        /* Modern Button Design */
+        button {
+            margin: 30px auto;
+            padding: 18px 45px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            background: linear-gradient(45deg, #ff69b4, #ff9ff3);
+            border: none;
+            border-radius: 35px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(255,105,180,0.4);
+            font-family: 'Pacifico', cursive;
+        }
+
+        button:hover {
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 8px 35px rgba(255,105,180,0.6);
+            background: linear-gradient(45deg, #ff9ff3, #ff69b4);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.3) 50%, transparent 80%);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
+        }
+
+        /* Enhanced Animations */
+        @keyframes borderGlow {
+            0% { opacity: 0.5; filter: hue-rotate(0deg); }
+            50% { opacity: 1; filter: hue-rotate(180deg); }
+            100% { opacity: 0.5; filter: hue-rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes heartThrob {
+            0% { transform: scale(1); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        /* Enhanced Sparkle Effect */
+        .sparkles {
+            position: fixed;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleFly 1.2s ease-out forwards;
+        }
+
+        @keyframes sparkleFly {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: translateY(-150px) scale(2); opacity: 0; }
+        }
+
+        @keyframes buttonShine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .text-box {
+                padding: 25px;
+            }
+            
+            button {
+                padding: 15px 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-box {
+                font-size: 1.3rem;
+            }
+            
+            .emoji {
+                margin: 15px 0;
+            }
+        }
+
+        /* Enhanced Animations */
+        @keyframes slideUp {
+            0% { transform: translateY(100%) rotateX(90deg); opacity: 0; }
+            100% { transform: translateY(0) rotateX(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%) rotateX(-90deg); opacity: 0; }
+            100% { transform: translateY(0) rotateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="neon-pulse"></div>
+    <div class="heart-pulse"></div>
+    <div class="emojis-floating" id="floatingEmojis"></div>
+    
+    <div class="container">
+        <div class="text-box" id="firstText">
+            <div class="emoji">💖🌸🎀</div>
+            <strong class="gradient-text">Hey Sweetheart!</strong> 
+            <span class="message-text">If you're flying solo, what magic brought you here? 🌟</span>
+        </div>
+        <div class="text-box" id="secondText">
+            <div class="emoji">💘💞💫</div>
+            <strong class="gradient-text">Secret Revealed:</strong> 
+            <span class="message-text">Discover if your crush feels the spark!<br>
+            <button onclick="window.open('index2.html', '_blank')">Unlock Mystery</button>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Floating Emojis System
+        const emojis = ['💖', '✨', '🌸', '💫', '🌺', '💘', '💞', '🎀', '💕', '🌟'];
+        const container = document.getElementById('floatingEmojis');
+
+        function createFloatingEmoji() {
+            const emoji = document.createElement('span');
+            emoji.className = 'floating-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDuration = Math.random() * 3 + 5 + 's';
+            emoji.style.fontSize = Math.random() * 25 + 25 + 'px';
+            container.appendChild(emoji);
+
+            setTimeout(() => emoji.remove(), 8000);
+        }
+
+        setInterval(createFloatingEmoji, 250);
+
+        // Animation Sequence
+        let firstText = document.getElementById('firstText');
+        let secondText = document.getElementById('secondText');
+
+        firstText.style.animation = 'slideUp 1s ease-out forwards';
+        
+        setTimeout(() => {
+            firstText.style.animation = 'fadeOut 1s ease forwards';
+            secondText.style.animation = 'slideDown 1s ease-out forwards';
+        }, 5000);
+
+        // Enhanced Sparkle Effect
+        document.addEventListener('mousemove', function(e) {
+            for(let i = 0; i < 3; i++) {
+                const sparkles = document.createElement('div');
+                sparkles.className = 'sparkles';
+                
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.pageX + Math.random() * 20 - 10 + 'px';
+                sparkle.style.top = e.pageY + Math.random() * 20 - 10 + 'px';
+                sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+                
+                sparkles.appendChild(sparkle);
+                document.body.appendChild(sparkles);
+                
+                setTimeout(() => sparkles.remove(), 1200);
+            }
+        });
+
+        // Button Hover Effect
+        document.querySelector('button').addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.1) rotate(2deg)';
+        });
+
+        document.querySelector('button').addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+
+        // Responsive Adjustments
+        function adjustLayout() {
+            if(window.innerWidth < 768) {
+                document.body.style.padding = '20px';
+            } else {
+                document.body.style.padding = '0';
+            }
+        }
+
+        window.addEventListener('resize', adjustLayout);
+        adjustLayout();
+
+        // Add random tilt to text boxes
+        document.querySelectorAll('.text-box').forEach(box => {
+            box.addEventListener('mousemove', (e) => {
+                const rect = box.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                box.style.transform = `perspective(1000px) rotateX(${(y - rect.height/2)/15}deg) rotateY(${-(x - rect.width/2)/15}deg)`;
+            });
+            
+            box.addEventListener('mouseleave', () => {
+                box.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
