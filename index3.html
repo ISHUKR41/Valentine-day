@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Valentine Experience 💖</title>
+    <style>
+        :root {
+            --primary-color: #ff1493;  /* Deep pink */
+            --secondary-color: #ff69b4; /* Hot pink */
+            --accent-color: #ffffff;    /* White */
+            --box-color-1: #ff85a2;     /* Soft pink */
+            --box-color-2: #ffa8b5;     /* Baby pink */
+            --box-color-3: #ffb3c1;     /* Light pink */
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, 
+                #ff007f, 
+                #ff1493, 
+                #ff69b4,
+                #ff85a2,
+                #ffb3c1);
+            animation: galaxyBackground 20s linear infinite;
+            overflow: hidden;
+            font-family: 'Great Vibes', cursive;
+            perspective: 1000px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="%23ff1493" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
+        }
+
+        @keyframes galaxyBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .message-box {
+            position: fixed;
+            padding: 3rem;
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.9) 20%, 
+                rgba(255, 255, 255, 0.7) 80%);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.5);
+            text-align: center;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(100vh) rotateX(90deg);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 4px solid var(--primary-color);
+            backdrop-filter: blur(15px);
+            margin: 1rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: boxBorderGlow 2s infinite alternate;
+        }
+
+        @keyframes boxBorderGlow {
+            from { border-color: var(--primary-color); }
+            to { border-color: var(--secondary-color); }
+        }
+
+        .message-box.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+            animation: boxFloat 6s ease-in-out infinite, 
+                       boxGlow 2s alternate infinite,
+                       boxScale 3s ease-in-out infinite;
+        }
+
+        @keyframes boxFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(3deg); }
+            75% { transform: translateY(10px) rotate(-3deg); }
+        }
+
+        @keyframes boxScale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .message-text {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            line-height: 1.4;
+            animation: textFlow 4s ease-in-out infinite;
+            background: linear-gradient(45deg, 
+                #ff007f, 
+                #ff1493, 
+                #ff69b4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes textFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced Heart Animation */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: heartFloat 8s linear forwards;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes heartFloat {
+            0% { 
+                transform: translateY(0) scale(0); 
+                opacity: 1;
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-150px) scale(2); 
+                opacity: 0.8;
+                filter: hue-rotate(180deg);
+            }
+            100% { 
+                transform: translateY(-300px) scale(0); 
+                opacity: 0;
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Enhanced Love Calculator Button */
+        .love-calculator {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(45deg, 
+                var(--primary-color), 
+                var(--secondary-color));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 2rem;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            transform-style: preserve-3d;
+            animation: buttonPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Sparkle Animation */
+        .sparkle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #fff, #ff1493);
+            border-radius: 50%;
+            animation: sparklePop 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .message-text {
+                font-size: 2.2rem;
+            }
+            .message-box {
+                padding: 2rem;
+                max-width: 90%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet>
+</head>
+<body>
+    <!-- Message Boxes -->
+    <div class="message-box" id="message1">
+        <div class="message-text">💖Bhai tu confrim hai n ki teri bandi hai! 💖</div>
+    </div>
+
+    <div class="message-box" id="message2">
+        <div class="message-text">🎉 chal thik hai, maan leta hu teri bhe gf/bf hai! 🎉</div>
+    </div>
+
+    <div class="message-box" id="message3">
+        <div class="message-text">🔮 check kar lee teri gf/bf tera se kitna pyar karti hai ! 🔮</div>
+        <a href="index2.html" class="love-calculator">Love💖😘 Calc ✨</a>
+    </div>
+
+    <div class="hearts" id="heartsContainer"></div>
+
+    <script>
+        const messages = [
+            { id: 'message1', duration: 8000, color: 'var(--box-color-1)' },
+            { id: 'message2', duration: 8000, color: 'var(--box-color-2)' },
+            { id: 'message3', duration: 0, color: 'var(--box-color-3)' }
+        ];
+
+        let heartTrail = [];
+        let lastPoint = { x: 0, y: 0 };
+
+        function showMessage(index) {
+            if (index >= messages.length) return;
+            
+            const message = document.getElementById(messages[index].id);
+            message.style.background = `linear-gradient(145deg, 
+                ${messages[index].color}, 
+                rgba(255, 255, 255, 0.8))`;
+            message.classList.add('active');
+
+            if (messages[index].duration > 0) {
+                setTimeout(() => {
+                    message.classList.remove('active');
+                    showMessage(index + 1);
+                }, messages[index].duration);
+            }
+        }
+
+        function createHeartTrail(x, y) {
+            // Create heart trail for drawing
+            const distance = Math.sqrt(
+                Math.pow(x - lastPoint.x, 2) + 
+                Math.pow(y - lastPoint.y, 2)
+            );
+
+            if (distance > 50) {
+                for (let i = 0; i < 3; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.className = 'heart';
+                    heart.style.left = x + 'px';
+                    heart.style.top = y + 'px';
+                    heart.style.animationDelay = i * 0.2 + 's';
+                    document.getElementById('heartsContainer').appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 8000);
+                }
+                lastPoint = { x, y };
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            createHeartTrail(e.clientX, e.clientY);
+            createSparkles(e.clientX, e.clientY);
+            document.body.style.backgroundPosition = 
+                `${e.clientX / 15}px ${e.clientY / 15}px`;
+        });
+
+        // Enhanced Touch Support
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            createHeartTrail(touch.clientX, touch.clientY);
+            createSparkles(touch.clientX, touch.clientY);
+        });
+
+        // Initialize first message
+        setTimeout(() => showMessage(0), 1000);
+    </script>
+</body>
+</html>
